@@ -1,0 +1,16 @@
+# Disposable Evergreen QA fixture; do not merge.
+name: Evergreen QA
+on:
+  push:
+    branches: ["qa/evergreen-*"]
+permissions: {}
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Check fixture
+        env:
+          EXPECTED: ready
+          ACTUAL: broken
+        run: test "$ACTUAL" = "$EXPECTED"
